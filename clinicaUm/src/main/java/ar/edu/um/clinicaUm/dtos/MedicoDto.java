@@ -1,3 +1,11 @@
 package ar.edu.um.clinicaUm.dtos;
 
-public record MedicoDto(String nombre, String apellido, String matricula, String especialidad) {}
+import java.util.List;
+
+public record MedicoDto(
+    String nombre,
+    String apellido,
+    String matricula,
+    String especialidad,
+    Boolean aceptaParticular,
+    List<ObraSocialDto> obrasSocialesAcepatadas) {}

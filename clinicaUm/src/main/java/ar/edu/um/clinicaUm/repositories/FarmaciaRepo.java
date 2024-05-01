@@ -9,11 +9,8 @@ import java.util.concurrent.ConcurrentHashMap;
 public class FarmaciaRepo {
 
   private static FarmaciaRepo instance = null;
-  private final Map<Integer, SimpleEntry<MedicamentoDto, Integer>> stock;
-
-  private FarmaciaRepo() {
-    this.stock = new ConcurrentHashMap<>();
-  }
+  private final Map<Integer, SimpleEntry<MedicamentoDto, Integer>> stock =
+      new ConcurrentHashMap<>();
 
   public static synchronized FarmaciaRepo getInstance() {
     if (instance == null) {

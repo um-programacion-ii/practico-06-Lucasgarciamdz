@@ -1,14 +1,14 @@
 package ar.edu.um.clinicaUm.services;
 
+import ar.edu.um.clinicaUm.dtos.MedicoDto;
 import ar.edu.um.clinicaUm.dtos.PacienteDto;
-import ar.edu.um.clinicaUm.dtos.RecetaDto;
 import ar.edu.um.clinicaUm.dtos.TurnoDto;
-import ar.edu.um.clinicaUm.repositories.FarmaciaRepo;
+import ar.edu.um.clinicaUm.repositories.ClinicaRepo;
 
 public class ClinicaSvc {
 
   private static ClinicaSvc instance = null;
-  private final FarmaciaRepo farmaciaRepo = FarmaciaRepo.getInstance();
+  private final ClinicaRepo clinicaRepo = ClinicaRepo.getInstance();
 
   private ClinicaSvc() {}
 
@@ -19,15 +19,13 @@ public class ClinicaSvc {
     return instance;
   }
 
-  public TurnoDto solicitarTurno(PacienteDto paciente, String especialidad, boolean conObraSocial) {
-    // Logic to create and return a new TurnoDto
-  }
-
-  public RecetaDto iniciarTurno(TurnoDto turno) {
-    // Logic to start a Turno and possibly return a RecetaDto
+  public synchronized TurnoDto solicitarTurno(PacienteDto paciente, MedicoDto medico) throws InterruptedException {
+    TurnoDto turno = new TurnoDto(medico, paciente);
+    clinicaRepo.addTurno(turno);
+    return turno;
   }
 
   public void finalizarTurno(TurnoDto turno) {
-    // Logic to finalize a Turno
+    clinicaRepo.finishTurno(turno);
   }
 }

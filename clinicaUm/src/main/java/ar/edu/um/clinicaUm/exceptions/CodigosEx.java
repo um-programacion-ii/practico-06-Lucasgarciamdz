@@ -1,7 +1,8 @@
 package ar.edu.um.clinicaUm.exceptions;
 
 public enum CodigosEx {
-  RECETA_SIN_MEDICAMENTOS("5000F", "La receta no tiene medicamentos");
+  RECETA_SIN_MEDICAMENTOS("5000F", "La receta no tiene medicamentos"),
+  MEDICO_NO_ENCONTRADO("5000C", "El medico no trabaja en la clinica");
 
   private final String message;
   private final String codigoEx;
