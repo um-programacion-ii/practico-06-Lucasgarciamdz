@@ -1,7 +1,6 @@
 package ar.edu.um.clinicaUm.repositories;
 
 import ar.edu.um.clinicaUm.dtos.PacienteDto;
-import java.util.HashMap;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 

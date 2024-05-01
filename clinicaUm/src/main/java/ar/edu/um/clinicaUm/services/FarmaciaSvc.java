@@ -37,11 +37,11 @@ public class FarmaciaSvc {
     List<MedicamentoDto> medicamentosComprados = new ArrayList<>();
 
     for (MedicamentoDto medicamento : receta.medicamentos().values()) {
-      SimpleEntry<MedicamentoDto, Integer> stockMedicamento =
+      SimpleEntry<MedicamentoDto, Integer> stockMedicamentos =
           farmaciaRepository.getMedicamento(medicamento);
-      if (stockMedicamento != null && stockMedicamento.getValue() > 0) {
-        farmaciaRepository.updateMedicamento(medicamento, stockMedicamento.getValue() - 1);
-        medicamentosComprados.add(stockMedicamento.getKey());
+      if (stockMedicamentos != null && stockMedicamentos.getValue() > 0) {
+        farmaciaRepository.updateMedicamento(medicamento, stockMedicamentos.getValue() - 1);
+        medicamentosComprados.add(stockMedicamentos.getKey());
       } else {
         medicamentosComprados.add(drogueriaRepo.pedirMedicamento(medicamento));
       }

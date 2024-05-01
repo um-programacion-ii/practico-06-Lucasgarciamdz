@@ -1,10 +1,7 @@
 package ar.edu.um.clinicaUm.repositories;
 
 import ar.edu.um.clinicaUm.dtos.MedicoDto;
-import ar.edu.um.clinicaUm.dtos.PacienteDto;
 import ar.edu.um.clinicaUm.dtos.TurnoDto;
-import ar.edu.um.clinicaUm.exceptions.ClinicaEx;
-import ar.edu.um.clinicaUm.exceptions.CodigosEx;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 
@@ -40,5 +37,12 @@ public class ClinicaRepo {
     medicosAtendiendo.remove(turno.medico().hashCode());
     turnos.remove(turno.hashCode());
     notifyAll();
+  }
+  public synchronized boolean isTurnoEnProceso(TurnoDto turno) {
+    return medicosAtendiendo.containsKey(turno.medico().hashCode());
+  }
+
+  public synchronized Map<Integer, MedicoDto> getMedicos() {
+    return medicos;
   }
 }

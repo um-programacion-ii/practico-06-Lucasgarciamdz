@@ -1,11 +1,11 @@
 package ar.edu.um.clinicaUm.dtos;
 
-import java.util.List;
+import java.util.Map;
 
 public record MedicoDto(
     String nombre,
     String apellido,
     String matricula,
     String especialidad,
-    Boolean aceptaParticular,
-    List<ObraSocialDto> obrasSocialesAcepatadas) {}
+    boolean aceptaParticular,
+    Map<Integer, ObraSocialDto> obrasSocialesAcepatadas) {}
