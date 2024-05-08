@@ -22,7 +22,7 @@ public class DrogueriaRepo {
     return instance;
   }
 
-  public MedicamentoDto pedirMedicamento(MedicamentoDto medicamento)
+  public MedicamentoDto getMedicamento (MedicamentoDto medicamento)
       throws InterruptedException, ExecutionException {
     long sleepTime = random.nextInt(5000);
     executorService.schedule(() -> {}, sleepTime, TimeUnit.MILLISECONDS).get();

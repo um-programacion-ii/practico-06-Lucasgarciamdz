@@ -43,7 +43,7 @@ public class FarmaciaSvc {
         farmaciaRepository.updateMedicamento(medicamento, stockMedicamentos.getValue() - 1);
         medicamentosComprados.add(stockMedicamentos.getKey());
       } else {
-        medicamentosComprados.add(drogueriaRepo.pedirMedicamento(medicamento));
+        medicamentosComprados.add(drogueriaRepo.getMedicamento(medicamento));
       }
     }
     return medicamentosComprados;
