@@ -12,6 +12,10 @@ public class FarmaciaRepo {
   private final Map<Integer, SimpleEntry<MedicamentoDto, Integer>> stock =
       new ConcurrentHashMap<>();
 
+  public static void resetInstance() {
+    instance = null;
+  }
+
   public static synchronized FarmaciaRepo getInstance() {
     if (instance == null) {
       instance = new FarmaciaRepo();

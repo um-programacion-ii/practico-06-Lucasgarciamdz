@@ -14,10 +14,15 @@ import java.util.concurrent.ExecutionException;
 public class FarmaciaSvc {
 
   private static FarmaciaSvc instance = null;
-  private final DrogueriaRepo drogueriaRepo = DrogueriaRepo.getInstance();
-  private final FarmaciaRepo farmaciaRepository = FarmaciaRepo.getInstance();
+  private DrogueriaSvc drogueriaSvc = DrogueriaSvc.getInstance();
+  private FarmaciaRepo farmaciaRepository = FarmaciaRepo.getInstance();
 
   private FarmaciaSvc() {}
+
+  public FarmaciaSvc(FarmaciaRepo farmaciaRepo, DrogueriaSvc drogueriaSvc) {
+    this.farmaciaRepository = farmaciaRepo;
+    this.drogueriaSvc = drogueriaSvc;
+  }
 
   public static synchronized FarmaciaSvc getInstance() {
     if (instance == null) {
@@ -43,7 +48,7 @@ public class FarmaciaSvc {
         farmaciaRepository.updateMedicamento(medicamento, stockMedicamentos.getValue() - 1);
         medicamentosComprados.add(stockMedicamentos.getKey());
       } else {
-        medicamentosComprados.add(drogueriaRepo.getMedicamento(medicamento));
+        medicamentosComprados.add(drogueriaSvc.solicitarMedicamento(medicamento));
       }
     }
     return medicamentosComprados;
