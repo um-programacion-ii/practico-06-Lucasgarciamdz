@@ -8,13 +8,18 @@ import ar.edu.um.clinicaUm.exceptions.CodigosEx;
 import ar.edu.um.clinicaUm.repositories.ClinicaRepo;
 import java.util.List;
 import java.util.Map;
+import java.util.logging.Logger;
 
 public class ClinicaSvc {
+
+  private static final Logger LOGGER = Logger.getLogger(ClinicaSvc.class.getName());
 
   private static ClinicaSvc instance = null;
   private final ClinicaRepo clinicaRepo = ClinicaRepo.getInstance();
 
-  private ClinicaSvc() {}
+  private ClinicaSvc() {
+    LOGGER.info("Se ha creado una nueva instancia de ClinicaSvc");
+  }
 
   public static synchronized ClinicaSvc getInstance() {
     if (instance == null) {
@@ -30,9 +35,12 @@ public class ClinicaSvc {
     }
 
     if (!medico.obrasSocialesAcepatadas().containsKey(paciente.getObraSocial().hashCode())) {
-      throw new ClinicaEx(CodigosEx.MEDICO_NO_ACEPTA_OBRA_SOCIAL, "Medico: " + medico.matricula() + "\nPaciente: " + paciente.getObraSocial().nombre());
+      throw new ClinicaEx(
+          CodigosEx.MEDICO_NO_ACEPTA_OBRA_SOCIAL,
+          "Medico: " + medico.matricula() + "\nPaciente: " + paciente.getObraSocial().nombre());
     }
 
+    LOGGER.info("Solicitando turno para " + paciente.getNombre() + " con " + medico.nombre());
     TurnoDto turno = new TurnoDto(medico, paciente);
     clinicaRepo.addTurno(turno);
     return turno;
@@ -40,19 +48,20 @@ public class ClinicaSvc {
 
   public synchronized void finalizarTurno(TurnoDto turno) {
     clinicaRepo.finishTurno(turno);
+    LOGGER.info("Turno finalizado: " + turno);
     notifyAll();
   }
 
   public synchronized void esperarTurno(TurnoDto turno) throws InterruptedException {
     while (clinicaRepo.isTurnoEnProceso(turno)) {
+      LOGGER.info("Esperando turno: " + turno);
       wait();
     }
   }
 
   public synchronized List<MedicoDto> getMedicos() {
     Map<Integer, MedicoDto> medicos = clinicaRepo.getMedicos();
-
+    LOGGER.info("Obteniendo la lista de médicos");
     return List.copyOf(medicos.values());
-
   }
 }

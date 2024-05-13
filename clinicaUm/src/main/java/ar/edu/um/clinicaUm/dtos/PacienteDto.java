@@ -6,8 +6,7 @@ public class PacienteDto {
   private ObraSocialDto obraSocial;
   private RecetaDto receta;
 
-  public PacienteDto() {
-  }
+  public PacienteDto() {}
 
   public PacienteDto(String nombre, String apellido, ObraSocialDto obraSocial, RecetaDto receta) {
     this.nombre = nombre;
