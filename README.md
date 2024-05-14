@@ -1,3 +1,5 @@
+[![Java CI with Maven](https://github.com/um-programacion-ii/practico-06-Lucasgarciamdz/actions/workflows/maven.yml/badge.svg?branch=develop)](https://github.com/um-programacion-ii/practico-06-Lucasgarciamdz/actions/workflows/maven.yml)
+
 # prog2.2024.practico06
 
 Escenario
