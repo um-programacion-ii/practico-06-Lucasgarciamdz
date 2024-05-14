@@ -81,4 +81,3 @@ jobs:
       uses: advanced-security/maven-dependency-submission-action@v1
       with:
         github-token: ${{ secrets.GITHUB_TOKEN }}
-      working-directory: ./clinicaUm
